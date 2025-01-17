@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Aplicación</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+
+<body>
+    <!-- Barra de Navegación -->
+    <nav>
+        <ul>
+            <li><a href="{{ url_for('index') }}">Inicio</a></li>
+            <li><a href="#reporte">Reporte técnico</a></li>
+            <li><a href="#repositorio">GitHub</a></li>
+        </ul>
+    </nav>
+
+    <!-- Contenido Principal -->
+    <div class="content">
+        <!-- Descripción del Proyecto -->
+        <section id="description">
+            <h2>Acerca del proyecto</h2>
+            <p>Este aplicativo predice la probabilidad de que un cliente obtenga un crédito basado en sus características. 
+                Es fácil de usar y tiene múltiples herramientas para ayudar al usuario.</p>
+        </section>
+
+        <div class="flex-container">
+            <!-- Video -->
+            <section id="video">
+                <h2>¿Tienes dudas?</h2>
+                <p>Mira el video tutorial para aprender a usar la aplicación:</p>
+                <video width="400" controls>
+                    <source src="{{ url_for('static', filename='tutorial.mp4') }}" type="video/mp4">
+                    Tu navegador no soporta la reproducción de videos.
+                </video>
+            </section>
+
+            <!-- Formulario -->
+            <section id="formulario">
+                <h2>Realiza una predicción</h2>
+                <p>Llena el formulario con tus datos y obtén un resultado al instante:</p>
+                <form id="prediction-form">
+                    <label for="c1">Característica 1:
+                        <input type="number" id="c1" name="c1" step="any" required>
+                    </label><br>
+                    <label for="c2">Característica 2:
+                        <input type="number" id="c2" name="c2" step="any" required>
+                    </label><br>
+                    <label for="c3">Característica 3:
+                        <input type="number" id="c3" name="c3" step="any" required>
+                    </label><br>
+                    <label for="c4">Característica 4:
+                        <input type="number" id="c4" name="c4" step="any" required>
+                    </label><br>
+                    <label for="c5">Característica 5:
+                        <input type="number" id="c5" name="c5" step="any" required>
+                    </label><br>
+                    <label for="c6">Característica 6:
+                        <input type="number" id="c6" name="c6" step="any" required>
+                    </label><br>
+                    <label for="c7">Característica 7:
+                        <input type="number" id="c7" name="c7" step="any" required>
+                    </label><br>
+                    <button type="submit">Enviar</button>
+                </form>
+                <div id="result"></div>
+            </section>
+        </div>
+
+        <!-- Reporte tecnico  -->
+        <section id="reporte">
+            <h2>Reporte Técnico</h2>
+            <p>Encuentra aquí todos los detalles sobre la elaboración de este proyecto</p>
+            <a>Blog del proyecto en Notion</a>
+        </section>
+
+        <!-- Repositorio -->
+        <section id="repositorio">
+            <h2>Repositorio</h2>
+            <p>En este repositorio puedes ver más a fondo sobre el desarrollo del código para lograr esta web app</p>
+            <a>Enlace de GitHub</a>
+        </section>
+
+        <script>
+            $(document).ready(function() {
+                $('#prediction-form').on('submit', function(event) {
+                    event.preventDefault(); // Prevent the form from submitting the traditional way
+                    $.ajax({
+                        url: "{{ url_for('form') }}",
+                        type: "POST",
+                        data: $(this).serialize(),
+                        success: function(response) {
+                            $('#result').html('<h2>Resultado de la Predicción</h2><p>La probabilidad de que el cliente obtenga el crédito es: <strong>' + response.prediction.toFixed(2) + '</strong></p>');
+                        },
+                        error: function(xhr, status, error) {
+                            $('#result').html('<p>Hubo un error al procesar el formulario: ' + error + '</p>');
+                        }
+                    });
+                });
+            });
+        </script>
+    </div>
+
+    <!-- Pie de Página -->
+    <footer>
+        <p> Página web desarrollada con fines educativos para la asignatura Redes Neuronales y Algoritmos Bioinspirados</p>
+    </footer>
+</body>
+</html>
