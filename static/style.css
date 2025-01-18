@@ -18,7 +18,7 @@ nav ul {
     list-style-type: none;
     padding: 0;
     display: flex;
-    justify-content: flex;
+    justify-content: flex-start;
     margin: 5px;
 }
 
@@ -29,9 +29,37 @@ nav ul li {
 nav ul li a {
     color: #2c2a29;
     text-decoration: none;
-    &:hover {
-        font-weight: bold;
+    padding-inline-start: 10px;
     }
+    
+nav ul li a:hover {
+    font-weight: bold;
+    text-decoration: underline;
+    text-decoration-color: #ffc09f;
+}
+
+.accordion-button {
+    background-color: #fcf5c7;
+    color: #666;
+    border: none;
+    padding: 10px;
+    text-align: left;
+    width: 100%;
+    cursor: pointer;
+    outline: none;
+    font-size: 18px;
+    border-radius: 10px;
+}
+
+.accordion-button.active, .accordion-button:hover {
+    background-color: #fcf5c7;
+}
+
+.accordion-content {
+    display: none;
+    padding: 0 18px;
+    background-color: white;
+    overflow: hidden;
 }
 
 .content {
@@ -39,19 +67,9 @@ nav ul li a {
     align-content: center;
     margin-left: 50px;
     margin-right: 50px;
-    padding-right: 12px;
-    padding-left: 20px;
-}
-
-.flex-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-}
-
-.flex-container section {
-    flex:content;
-    margin: 5px;
+    padding-right: 50px;
+    padding-left: 50px;
+    padding-bottom: 50px;
 }
 
 .content h1, .content h2 {
@@ -62,25 +80,64 @@ nav ul li a {
     color: #666;
 }
 
+.content label {
+    display: block;
+    margin-top: 10px;
+    color: #666;
+    font-family: 'Montserrat', sans-serif;
+}
+
 .content section {
-    margin-bottom: 20px;
+    margin-bottom: 15px;
 }
 
-.content video {
-    max-width: 100%;
-    height: auto;
+form {
+    align-content: center;
+    margin-right: 30px;
+    margin-left: 30px;
+    padding: 20px;
+    border: 1px solid #ffc09f;
+    border-radius: 4px;
+    background-color: white;
+    padding-right: 80px;
 }
 
-button {
-    background-color: #007BFF;
+.content div[id="result"] {
+    font-weight: bold;
+    align-content: center;
+    text-align: center;
+}
+
+.content input[type="number"], .content textarea {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    border: 1px solid #ffc09f;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-family: 'Montserrat', sans-serif; 
+    color: #666;
+}
+
+.content button[type="submit"] {
+    background-color: #ffc09f;
     color: white;
-    border: none;
     padding: 10px 15px;
     cursor: pointer;
+    border-radius: 15px; 
+    font-family: 'Montserrat', sans-serif; 
+    border-color: white;
+    &:hover {
+        background-color: #ff8c61;
+        font-weight: bold;
+    }
 }
 
-button:hover {
-    background-color: #0056b3;
+.button-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 5px; 
 }
 
 footer {
