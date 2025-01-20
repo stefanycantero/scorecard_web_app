@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request, jsonify
 import numpy as np
-import pickle 
+import pickle
 
 app = Flask(__name__)
 
@@ -10,51 +10,9 @@ def index():
 
 @app.route('/form', methods=['POST'])
 def form():
-
-    """
-    0   loan_amnt                            887379 non-null  float64
-    1   term                                 887379 non-null  int64  
-    2   int_rate                             887379 non-null  float64
-    3   installment                          887379 non-null  float64
-    4   sub_grade                            887379 non-null  float64
-    5   emp_length                           887379 non-null  int32  
-    6   annual_inc                           887379 non-null  float64
-    7   loan_status                          887379 non-null  int32  
-    8   dti                                  887379 non-null  float64
-    9   delinq_2yrs                          887379 non-null  float64
-    10  inq_last_6mths                       887379 non-null  float64
-    11  open_acc                             887379 non-null  float64
-    12  pub_rec                              887379 non-null  float64
-    13  revol_bal                            887379 non-null  float64
-    14  revol_util                           887379 non-null  float64
-    15  collections_12_mths_ex_med           887379 non-null  float64
-    16  acc_now_delinq                       887379 non-null  float64
-    17  tot_coll_amt                         887379 non-null  float64
-    18  tot_cur_bal                          887379 non-null  float64
-    19  home_ownership_MORTGAGE              887379 non-null  float64
-    20  home_ownership_NONE                  887379 non-null  float64
-    21  home_ownership_OTHER                 887379 non-null  float64
-    22  home_ownership_OWN                   887379 non-null  float64
-    23  home_ownership_RENT                  887379 non-null  float64
-    24  verification_status_Source Verified  887379 non-null  float64
-    25  verification_status_Verified         887379 non-null  float64
-    26  purpose_credit_card                  887379 non-null  float64
-    27  purpose_debt_consolidation           887379 non-null  float64
-    28  purpose_educational                  887379 non-null  float64
-    29  purpose_home_improvement             887379 non-null  float64
-    30  purpose_house                        887379 non-null  float64
-    31  purpose_major_purchase               887379 non-null  float64
-    32  purpose_medical                      887379 non-null  float64
-    33  purpose_moving                       887379 non-null  float64
-    34  purpose_other                        887379 non-null  float64
-    35  purpose_renewable_energy             887379 non-null  float64
-    36  purpose_small_business               887379 non-null  float64
-    37  purpose_vacation                     887379 non-null  float64
-    38  purpose_wedding                      887379 non-null  float64
-    """
-
     model = pickle.load(open('model.pkl', 'rb'))
     try:            
+        # Guardar las variables ingresadas en un diccionario variable:valor ingresado
         features = [
             'loan_amnt', 'term', 'int_rate', 'installment', 'sub_grade', 'emp_length',
             'annual_inc', 'dti', 'delinq_2yrs', 'inq_last_6mths', 'open_acc', 'pub_rec',
@@ -62,19 +20,42 @@ def form():
             'tot_coll_amt', 'tot_cur_bal', 'home_ownership', 'verification_status', 'purpose'
         ]
 
-        # Guardar las variables ingresadas en un diccionario variable:valor ingresado
         form_data = {feature: request.form.get(feature) for feature in features}
 
         for feature in features:
-            if feature not in ['home_ownership', 'verification_status', 'purpose']:
-                form_data[feature] = float(form_data[feature])
+            if feature not in ['sub_grade','home_ownership', 'verification_status', 'purpose']:
+                form_data[feature] = float(form_data[feature].replace(',', '.'))
+        
+        # Transformación de sub_grade
+        sub_grade = request.form.get('sub_grade')
 
-        # Transformación de las variables sub_grade y las que pasan por One Hot 
+        letter_value = {
+            'A': 7,
+            'B': 6,
+            'C': 5,
+            'D': 4,
+            'E': 3,
+            'F': 2,
+            'G': 1
+        }
+
+        number_value = {
+            '1': 0.8,
+            '2': 0.6,
+            '3': 0.4,
+            '4': 0.2,
+            '5': 0.0
+        }
+        
+        letter = sub_grade[0].upper()
+        number = sub_grade[1]
+
+        sub_grade = letter_value[letter] + number_value[number]
+
+        form_data['sub_grade'] = sub_grade
+
+        # Transformación de las variables que pasan por One Hot 
         categorical_features = {
-            'sub_grade': ['A1', 'A2', 'A3', 'A4', 'A5', 'B1', 'B2', 'B3', 'B4', 'B5', 
-                        'C1', 'C2', 'C3', 'C4', 'C5', 'D1', 'D2', 'D3', 'D4', 'D5', 
-                        'E1', 'E2', 'E3', 'E4', 'E5', 'F1', 'F2', 'F3', 'F4', 'F5', 
-                        'G1', 'G2', 'G3', 'G4', 'G5'],
             'home_ownership': ['MORTGAGE', 'NONE', 'OTHER', 'OWN', 'RENT'],
             'verification_status': ['Source Verified', 'Verified'],
             'purpose': [
@@ -91,11 +72,22 @@ def form():
             for category in value:
                 encoded_features.append(1 if form_data[feature] == category else 0)
 
-        data = np.array([list(form_data.values())[:17] + encoded_features])
+        # Guardar valores para la predicción
+        numerical_features = [
+            form_data['loan_amnt'], form_data['term'], form_data['int_rate'], form_data['installment'],
+            form_data['sub_grade'], form_data['emp_length'], form_data['annual_inc'], form_data['dti'],
+            form_data['delinq_2yrs'], form_data['inq_last_6mths'], form_data['open_acc'], form_data['pub_rec'],
+            form_data['revol_bal'], form_data['revol_util'], form_data['collections_12_mths_ex_med'],
+            form_data['acc_now_delinq'], form_data['tot_coll_amt'], form_data['tot_cur_bal']
+        ]
 
-        prediction = model.predict(data)[0]
+        X = np.array(numerical_features + encoded_features).reshape(1, -1)
 
-        return jsonify(prediction=prediction)
+        try:
+            prediction = model.predict(X)[0]
+            return jsonify(prediction=prediction)
+        except Exception as e:
+            return jsonify(error="Prediction error: " + str(e))
 
     except Exception as e:
         return jsonify(error=str(e))
