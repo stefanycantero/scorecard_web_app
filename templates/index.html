@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Scorecard</title>
+    <title>Scorecard Prediction</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
@@ -24,7 +24,8 @@
         <!-- Descripción del Proyecto -->
         <section id="description">
             <h2>Acerca del proyecto</h2>
-            <p>Este aplicativo predice la probabilidad de que un cliente obtenga un crédito basado en sus características. 
+            <p>Este aplicativo predice la probabilidad de que un cliente obtenga un crédito basado en sus
+                características.
                 Es fácil de usar y tiene múltiples herramientas para ayudar al usuario.</p>
         </section>
 
@@ -45,32 +46,99 @@
         <!-- Formulario -->
         <section id="formulario">
             <h2>Realiza una predicción</h2>
-            <p>Llena el formulario con tus datos y obtén un resultado al instante:</p>
+            <p>En este formulario encontrarás distintas preguntas con relación al crédito solicitado.</p>
             <form id="prediction-form">
-                <label for="c1">Característica 1:<br>
-                    <input type="number" id="c1" name="c1" step="any" required>
-                </label><br>
-                <label for="c2">Característica 2:<br>
-                    <input type="number" id="c2" name="c2" step="any" required>
-                </label><br>
-                <label for="c3">Característica 3:<br>
-                    <input type="number" id="c3" name="c3" step="any" required>
-                </label><br>
-                <label for="c4">Característica 4:<br>
-                    <input type="number" id="c4" name="c4" step="any" required>
-                </label><br>
-                <label for="c5">Característica 5:<br>
-                    <input type="number" id="c5" name="c5" step="any" required>
-                </label><br>
-                <label for="c6">Característica 6:<br>
-                    <input type="number" id="c6" name="c6" step="any" required>
-                </label><br>
-                <label for="c7">Característica 7:<br>
-                    <input type="number" id="c7" name="c7" step="any" required>
-                </label><br>
+                <div class="form-column">
+                    <label for="loan_amnt">Monto del crédito:
+                        <input type="number" id="loan_amnt" name="loan_amnt" step="any" required>
+                    </label><br>
+                    <label for="term">Plazo:
+                        <input type="number" id="term" name="term" step="any" required>
+                    </label><br>
+                    <label for="int_rate">Tasa de interés:
+                        <input type="number" id="int_rate" name="int_rate" step="any" required>
+                    </label><br>
+                    <label for="installment">Cuota:
+                        <input type="number" id="installment" name="installment" step="any" required>
+                    </label><br>
+                    <label for="sub_grade">Subgrado:
+                        <input type="number" id="sub_grade" name="sub_grade" step="any" required>
+                    </label><br>
+                    <label for="emp_length">Años de empleo:
+                        <input type="number" id="emp_length" name="emp_length" step="any" required>
+                    </label><br>
+                    <label for="annual_inc">Ingreso anual:
+                        <input type="number" id="annual_inc" name="annual_inc" step="any" required>
+                    </label><br>
+                    <label for="dti">Relación deuda-ingreso:
+                        <input type="number" id="dti" name="dti" step="any" required>
+                    </label><br>
+                    <label for="delinq_2yrs">Morosidad en 2 años:
+                        <input type="number" id="delinq_2yrs" name="delinq_2yrs" step="any" required>
+                    </label><br>
+                    <label for="inq_last_6mths">Consultas en los últimos 6 meses:
+                        <input type="number" id="inq_last_6mths" name="inq_last_6mths" step="any" required>
+                    </label><br>
+                    <label for="open_acc">Cuentas abiertas:
+                        <input type="number" id="open_acc" name="open_acc" step="any" required>
+                    </label><br>    
+                </div>
+                <div class="form-column">
+                    <label for="pub_rec">Registros públicos:
+                        <input type="number" id="pub_rec" name="pub_rec" step="any" required>
+                    </label><br>
+                    <label for="revol_bal">Saldo revolvente:
+                        <input type="number" id="revol_bal" name="revol_bal" step="any" required>
+                    </label><br>
+                    <label for="revol_util">Utilización revolvente:
+                        <input type="number" id="revol_util" name="revol_util" step="any" required>
+                    </label><br>
+                    <label for="collections_12_mths_ex_med">Colecciones en 12 meses excluyendo médicas:
+                        <input type="number" id="collections_12_mths_ex_med" name="collections_12_mths_ex_med"
+                            step="any" required>
+                    </label><br>
+                    <label for="acc_now_delinq">Cuentas actualmente morosas:
+                        <input type="number" id="acc_now_delinq" name="acc_now_delinq" step="any" required>
+                    </label><br>
+                    <label for="tot_coll_amt">Monto total de colecciones:
+                        <input type="number" id="tot_coll_amt" name="tot_coll_amt" step="any" required>
+                    </label><br>
+                    <label for="tot_cur_bal">Saldo total actual:
+                        <input type="number" id="tot_cur_bal" name="tot_cur_bal" step="any" required>
+                    </label><br>
+                    <label for="home_ownership">Propiedad de vivienda:</label>
+                    <select id="home_ownership" name="home_ownership" required>
+                        <option value="MORTGAGE">Hipoteca</option>
+                        <option value="NONE">Ninguna</option>
+                        <option value="OTHER">Otra</option>
+                        <option value="OWN">Propia</option>
+                        <option value="RENT">Alquiler</option>
+                    </select><br>
+                    <label for="verification_status">Estado de verificación:</label>
+                    <select id="verification_status" name="verification_status" required>
+                        <option value="Source Verified">Fuente verificada</option>
+                        <option value="Verified">Verificado</option>
+                    </select><br>
+                    <label for="purpose">Propósito:</label>
+                    <select id="purpose" name="purpose" required>
+                        <option value="credit_card">Tarjeta de crédito</option>
+                        <option value="debt_consolidation">Consolidación de deuda</option>
+                        <option value="educational">Educativo</option>
+                        <option value="home_improvement">Mejoras en el hogar</option>
+                        <option value="house">Casa</option>
+                        <option value="major_purchase">Compra importante</option>
+                        <option value="medical">Médico</option>
+                        <option value="moving">Mudanza</option>
+                        <option value="other">Otro</option>
+                        <option value="renewable_energy">Energía renovable</option>
+                        <option value="small_business">Pequeño negocio</option>
+                        <option value="vacation">Vacaciones</option>
+                        <option value="wedding">Boda</option>
+                    </select><br>
+                </div>
                 <div class="button-container">
                     <button type="submit">Enviar</button>
-                </div>
+                </div>    
             </form>
             <div id="result"></div>
         </section>
@@ -90,27 +158,27 @@
         </section> -->
 
         <script>
-            $(document).ready(function() {
+            $(document).ready(function () {
                 // Formulario
-                $('#prediction-form').on('submit', function(event) {
+                $('#prediction-form').on('submit', function (event) {
                     event.preventDefault(); // Prevent the form from submitting the traditional way
                     $.ajax({
                         url: "{{ url_for('form') }}",
                         type: "POST",
                         data: $(this).serialize(),
-                        success: function(response) {
+                        success: function (response) {
                             $('#result').html(
                                 '<h2>Resultado de la predicción</h2><p>La probabilidad de que el cliente obtenga el crédito es: <strong>' + response.prediction.toFixed(2) + '</strong></p>'
                             );
                         },
-                        error: function(xhr, status, error) {
+                        error: function (xhr, status, error) {
                             $('#result').html('<p>Hubo un error al procesar el formulario: ' + error + '</p>');
                         }
                     });
                 });
-        
+
                 // Acordión
-                $('.accordion-button').click(function() {
+                $('.accordion-button').click(function () {
                     $(this).next('.accordion-content').slideToggle();
                     $(this).toggleClass('active');
                 });
@@ -120,7 +188,9 @@
 
     <!-- Pie de Página -->
     <footer>
-        <p> Página web desarrollada con fines educativos para la asignatura Redes Neuronales y Algoritmos Bioinspirados</p>
+        <p> Página web desarrollada con fines educativos para la asignatura Redes Neuronales y Algoritmos Bioinspirados
+        </p>
     </footer>
 </body>
+
 </html>
