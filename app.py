@@ -69,7 +69,29 @@ def form():
             if feature not in ['home_ownership', 'verification_status', 'purpose']:
                 form_data[feature] = float(form_data[feature])
 
-        # Variables que pasan por One Hot 
+        # Transformación de sub_grade
+        letter_value = {
+            'A': 7,
+            'B': 6,
+            'C': 5,
+            'D': 4,
+            'E': 3,
+            'F': 2,
+            'G': 1
+        }
+
+        number_value = {
+            '1': 0.8,
+            '2': 0.6,
+            '3': 0.4,
+            '4': 0.2,
+            '5': 0.0
+        }
+
+        sub_grade = form_data['sub_grade']
+        form_data['sub_grade'] = float(letter_value[sub_grade[0]] + number_value[sub_grade[1]])
+
+        # Transformación de las variables que pasan por One Hot 
         categorical_features = {
             'home_ownership': ['MORTGAGE', 'NONE', 'OTHER', 'OWN', 'RENT'],
             'verification_status': ['Source Verified', 'Verified'],
