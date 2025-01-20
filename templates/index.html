@@ -61,9 +61,44 @@
                     <label for="installment">Cuota:
                         <input type="number" id="installment" name="installment" step="any" required>
                     </label><br>
-                    <label for="sub_grade">Subgrado:
-                        <input type="text" id="sub_grade" name="sub_grade" step="any" required>
-                    </label><br>
+                    <label for="sub_grade">Subgrado:</label>
+                    <select id="sub_grade" name="sub_grade" required>
+                        <option value="A1">A1</option>
+                        <option value="A2">A2</option>
+                        <option value="A3">A3</option>
+                        <option value="A4">A4</option>
+                        <option value="A5">A5</option>
+                        <option value="B1">B1</option>
+                        <option value="B2">B2</option>
+                        <option value="B3">B3</option>
+                        <option value="B4">B4</option>
+                        <option value="B5">B5</option>
+                        <option value="C1">C1</option>
+                        <option value="C2">C2</option>
+                        <option value="C3">C3</option>
+                        <option value="C4">C4</option>
+                        <option value="C5">C5</option>
+                        <option value="D1">D1</option>
+                        <option value="D2">D2</option>
+                        <option value="D3">D3</option>
+                        <option value="D4">D4</option>
+                        <option value="D5">D5</option>
+                        <option value="E1">E1</option>
+                        <option value="E2">E2</option>
+                        <option value="E3">E3</option>
+                        <option value="E4">E4</option>
+                        <option value="E5">E5</option>
+                        <option value="F1">F1</option>
+                        <option value="F2">F2</option>
+                        <option value="F3">F3</option>
+                        <option value="F4">F4</option>
+                        <option value="F5">F5</option>
+                        <option value="G1">G1</option>
+                        <option value="G2">G2</option>
+                        <option value="G3">G3</option>
+                        <option value="G4">G4</option>
+                        <option value="G5">G5</option>
+                    </select><br>
                     <label for="emp_length">Años de empleo:
                         <input type="number" id="emp_length" name="emp_length" step="any" required>
                     </label><br>
@@ -160,18 +195,22 @@
         <script>
             $(document).ready(function () {
                 // Formulario
-                $('#prediction-form').on('submit', function (event) {
+                $('#prediction-form').on('submit', function(event) {
                     event.preventDefault(); // Prevent the form from submitting the traditional way
                     $.ajax({
                         url: "{{ url_for('form') }}",
                         type: "POST",
                         data: $(this).serialize(),
-                        success: function (response) {
-                            $('#result').html(
-                                '<h2>Resultado de la predicción</h2><p>La probabilidad de que el cliente obtenga el crédito es: <strong>' + response.prediction.toFixed(2) + '</strong></p>'
-                            );
+                        success: function(response) {
+                            if (response.prediction !== undefined) {
+                                $('#result').html(
+                                    '<h2>Resultado de la Predicción</h2><p>La probabilidad de que el cliente obtenga el crédito es: <strong>' + response.prediction.toFixed(2) + '</strong></p>'
+                                );
+                            } else if (response.error !== undefined) {
+                                $('#result').html('<p>Hubo un error al procesar el formulario: ' + response.error + '</p>');
+                            }
                         },
-                        error: function (xhr, status, error) {
+                        error: function(xhr, status, error) {
                             $('#result').html('<p>Hubo un error al procesar el formulario: ' + error + '</p>');
                         }
                     });

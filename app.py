@@ -69,30 +69,12 @@ def form():
             if feature not in ['home_ownership', 'verification_status', 'purpose']:
                 form_data[feature] = float(form_data[feature])
 
-        # Transformación de sub_grade
-        letter_value = {
-            'A': 7,
-            'B': 6,
-            'C': 5,
-            'D': 4,
-            'E': 3,
-            'F': 2,
-            'G': 1
-        }
-
-        number_value = {
-            '1': 0.8,
-            '2': 0.6,
-            '3': 0.4,
-            '4': 0.2,
-            '5': 0.0
-        }
-
-        sub_grade = form_data['sub_grade']
-        form_data['sub_grade'] = float(letter_value[sub_grade[0]] + number_value[sub_grade[1]])
-
-        # Transformación de las variables que pasan por One Hot 
+        # Transformación de las variables sub_grade y las que pasan por One Hot 
         categorical_features = {
+            'sub_grade': ['A1', 'A2', 'A3', 'A4', 'A5', 'B1', 'B2', 'B3', 'B4', 'B5', 
+                        'C1', 'C2', 'C3', 'C4', 'C5', 'D1', 'D2', 'D3', 'D4', 'D5', 
+                        'E1', 'E2', 'E3', 'E4', 'E5', 'F1', 'F2', 'F3', 'F4', 'F5', 
+                        'G1', 'G2', 'G3', 'G4', 'G5'],
             'home_ownership': ['MORTGAGE', 'NONE', 'OTHER', 'OWN', 'RENT'],
             'verification_status': ['Source Verified', 'Verified'],
             'purpose': [
@@ -111,7 +93,7 @@ def form():
 
         data = np.array([list(form_data.values())[:17] + encoded_features])
 
-        prediction = model.predict(data)[0]    
+        prediction = model.predict(data)[0]
 
         return jsonify(prediction=prediction)
 

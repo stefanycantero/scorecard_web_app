@@ -127,7 +127,7 @@ select, option {
     text-align: center;
 }
 
-.content input[type="number"], .content textarea {
+.content input[type="number"], .content input[type="text"], .content textarea {
     width: 100%;
     padding: 10px;
     margin-top: 5px;
