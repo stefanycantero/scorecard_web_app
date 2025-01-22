@@ -197,7 +197,7 @@
                         success: function(response) {
                             if (response.prediction !== undefined) {
                                 $('#result').html(
-                                    '<h2>Resultado de la Predicción</h2><p>La probabilidad de que el cliente obtenga el crédito es: <strong>' + response.prediction.toFixed(2) + '</strong></p>'
+                                    '<h2>Resultado de la Predicción</h2><p>Su puntaje crediticio es: <strong>' + response.prediction.toFixed(2) + '</strong></p>'
                                 );
                             } else if (response.error !== undefined) {
                                 $('#result').html('<p>Hubo un error al procesar el formulario: ' + response.error + '</p>');

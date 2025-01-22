@@ -1,9 +1,9 @@
 from flask import Flask, render_template, request, jsonify
 import numpy as np
 import pickle
+from model import ScorecardModel # Necesario para deserializar el modelo
 
 app = Flask(__name__)
-model = pickle.load(open('model.pkl', 'rb'))
 
 @app.route('/')
 def index():
@@ -11,6 +11,13 @@ def index():
 
 @app.route('/form', methods=['POST'])
 def form():
+    
+    with open('model.pkl', 'rb') as file:
+        model = pickle.load(file)
+
+    with open('scaler.pkl', 'rb') as file:
+        scaler = pickle.load(file)
+
     try:            
         # Guardar las variables ingresadas en un diccionario variable:valor ingresado
         features = [
@@ -70,7 +77,7 @@ def form():
         # La opción elegida en cada categoría se codifica como 1 y el resto como 0
         for feature, value in categorical_features.items():
             for category in value:
-                encoded_features.append(1 if form_data[feature] == category else 0)
+                encoded_features.append(1 if form_data.get(feature) == category else 0)
 
         # Guardar valores para la predicción
         numerical_features = [
@@ -80,11 +87,15 @@ def form():
             form_data['revol_bal'], form_data['revol_util'], form_data['tot_coll_amt'], form_data['tot_cur_bal']
         ]
 
-        X = np.array(numerical_features + encoded_features).reshape(1, -1)
+        # Escalar los valores numéricos
+        numerical_features_scaled = scaler.transform([numerical_features])[0]
 
+        X = np.array(numerical_features_scaled.tolist() + encoded_features).reshape(1, -1)
+        print(X)
         try:
-            prediction = model.predict(X)[0]
-            return jsonify(prediction=prediction)
+            prediction = model.predict(X)
+            return jsonify(prediction=int(prediction))
+        
         except Exception as e:
             return jsonify(error="Prediction error: " + str(e), details={"input_data": form_data, "encoded_features": encoded_features})
 
