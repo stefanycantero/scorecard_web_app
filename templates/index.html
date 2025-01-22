@@ -128,13 +128,6 @@
                     <label for="revol_util">Utilización revolvente:
                         <input type="number" id="revol_util" name="revol_util" step="any" required>
                     </label><br>
-                    <label for="collections_12_mths_ex_med">Colecciones en 12 meses excluyendo médicas:
-                        <input type="number" id="collections_12_mths_ex_med" name="collections_12_mths_ex_med"
-                            step="any" required>
-                    </label><br>
-                    <label for="acc_now_delinq">Cuentas actualmente morosas:
-                        <input type="number" id="acc_now_delinq" name="acc_now_delinq" step="any" required>
-                    </label><br>
                     <label for="tot_coll_amt">Monto total de colecciones:
                         <input type="number" id="tot_coll_amt" name="tot_coll_amt" step="any" required>
                     </label><br>
@@ -216,7 +209,7 @@
                     });
                 });
 
-                // Acordión
+                // Acordeón
                 $('.accordion-button').click(function () {
                     $(this).next('.accordion-content').slideToggle();
                     $(this).toggleClass('active');

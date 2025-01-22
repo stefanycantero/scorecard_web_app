@@ -3,6 +3,7 @@ import numpy as np
 import pickle
 
 app = Flask(__name__)
+model = pickle.load(open('model.pkl', 'rb'))
 
 @app.route('/')
 def index():
@@ -10,14 +11,13 @@ def index():
 
 @app.route('/form', methods=['POST'])
 def form():
-    model = pickle.load(open('model.pkl', 'rb'))
     try:            
         # Guardar las variables ingresadas en un diccionario variable:valor ingresado
         features = [
             'loan_amnt', 'term', 'int_rate', 'installment', 'sub_grade', 'emp_length',
             'annual_inc', 'dti', 'delinq_2yrs', 'inq_last_6mths', 'open_acc', 'pub_rec',
-            'revol_bal', 'revol_util', 'collections_12_mths_ex_med', 'acc_now_delinq',
-            'tot_coll_amt', 'tot_cur_bal', 'home_ownership', 'verification_status', 'purpose'
+            'revol_bal', 'revol_util', 'tot_coll_amt', 'tot_cur_bal', 'home_ownership', 
+            'verification_status', 'purpose'
         ]
 
         form_data = {feature: request.form.get(feature) for feature in features}
@@ -77,8 +77,7 @@ def form():
             form_data['loan_amnt'], form_data['term'], form_data['int_rate'], form_data['installment'],
             form_data['sub_grade'], form_data['emp_length'], form_data['annual_inc'], form_data['dti'],
             form_data['delinq_2yrs'], form_data['inq_last_6mths'], form_data['open_acc'], form_data['pub_rec'],
-            form_data['revol_bal'], form_data['revol_util'], form_data['collections_12_mths_ex_med'],
-            form_data['acc_now_delinq'], form_data['tot_coll_amt'], form_data['tot_cur_bal']
+            form_data['revol_bal'], form_data['revol_util'], form_data['tot_coll_amt'], form_data['tot_cur_bal']
         ]
 
         X = np.array(numerical_features + encoded_features).reshape(1, -1)
@@ -87,7 +86,7 @@ def form():
             prediction = model.predict(X)[0]
             return jsonify(prediction=prediction)
         except Exception as e:
-            return jsonify(error="Prediction error: " + str(e))
+            return jsonify(error="Prediction error: " + str(e), details={"input_data": form_data, "encoded_features": encoded_features})
 
     except Exception as e:
         return jsonify(error=str(e))
