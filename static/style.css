@@ -76,6 +76,12 @@ nav ul li a:hover {
     color: #333;
 }
 
+h2 {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #333;
+}
+
 .content p {
     color: #666;
 }
@@ -92,15 +98,33 @@ nav ul li a:hover {
 }
 
 form {
+    background: #fff;
     align-content: center;
     margin-right: 30px;
     margin-left: 30px;
     padding: 20px;
     border: 1px solid #ffc09f;
-    border-radius: 4px;
-    background-color: white;
+    border-radius: 10px;
+    background-color: rgb(245, 237, 237);
     padding-right: 80px;
     font-family: 'Montserrat', sans-serif;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeIn 0.5s ease-in-out forwards;
+}
+
+input {
+    border: 2px solid #ccc;
+    padding: 10px;
+    border-radius: 5px;
+    width: 100%;
+    transition: border 0.3s;
+}
+
+input:focus {
+    border-color: #007BFF;
+    outline: none;
 }
 
 select, option {
@@ -165,4 +189,25 @@ footer {
     color: white;
     text-align: center;
     padding: 10px 10px;
+}
+
+button {
+    background: #007BFF;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+button:hover {
+    background: #0056b3;
+}
+
+@keyframes fadeIn {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }

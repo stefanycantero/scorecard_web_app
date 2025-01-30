@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Scorecard Prediction</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="../static/style.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 
@@ -47,7 +47,7 @@
         <section id="formulario">
             <h2>Realiza una predicción</h2>
             <p>En este formulario encontrarás distintas preguntas con relación al crédito solicitado.</p>
-            <form id="prediction-form">
+            <form action="/form" method="POST">
                 <div class="form-column">
                     <label for="loan_amnt">Monto del crédito:
                         <input type="number" id="loan_amnt" name="loan_amnt" step="any" required>
@@ -165,10 +165,10 @@
                     </select><br>
                 </div>
                 <div class="button-container">
-                    <button type="submit">Enviar</button>
+                    <input type="submit" value="Predecir">
                 </div>    
             </form>
-            <div id="result"></div>
+           <!-- <div id="result"></div>-->
         </section>
 
         <!-- Reporte tecnico 
@@ -185,7 +185,7 @@
             <a>Enlace de GitHub</a>
         </section> -->
 
-        <script>
+        <!-- <script>
             $(document).ready(function () {
                 // Formulario
                 $('#prediction-form').on('submit', function(event) {
@@ -215,7 +215,7 @@
                     $(this).toggleClass('active');
                 });
             });
-        </script>
+        </script>-->
     </div>
 
     <!-- Pie de Página -->

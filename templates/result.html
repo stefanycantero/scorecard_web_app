@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resultado de Predicción</title>
+    <link rel="stylesheet" href="../static/result_styles.css">
+</head>
+<body>
+    <div class="result-container">
+        <h2>Tu puntaje es: {{ score }}</h2>
+        <div class="score-category">Categoría de riesgo: {{ risk_category }}</div>
+        <div class="score-decision">Decisión: {{ decision }}</div>
+        
+        <!-- Medidor Circular -->
+        <div class="score-meter">
+            <svg viewBox="0 0 36 36" class="circular-chart">
+                <path class="circle-background"
+                      d="M18 2.0845
+                         a 15.9155 15.9155 0 0 1 0 31.831
+                         a 15.9155 15.9155 0 0 1 0 -31.831"
+                      fill="none" stroke="#e6e6e6" stroke-width="3" />
+                <path class="circle-fill"
+                      d="M18 2.0845
+                         a 15.9155 15.9155 0 0 1 0 31.831
+                         a 15.9155 15.9155 0 0 1 0 -31.831"
+                      fill="none" stroke="{{ 'red' if score < 550 else 'yellow' if score < 650 else 'green' if score < 700 else 'blue' }}"  stroke-width="3"
+                      stroke-dasharray="{{ (score - 300) / (850 - 300) * 100 }}, 100" />
+            </svg>
+            <div class="score-text">{{ score }}</div>
+        </div>
+        <div class="global-score">
+            <h2>Puntuaje Global</h2>
+            <p>En la gráfica que ves, se muestra cómo están distribuidos los puntajes de otras personas. </p>
+            <p>A medida que más personas tienen puntajes similares, esos puntajes aparecerán más cerca de la parte más alta de la gráfica. </p>
+            <p>El punto rojo que verás en la gráfica indica dónde se encuentra tu puntaje en comparación con los demás. Si tu punto está más cerca de la parte izquierda, significa que tu puntaje es más bajo en relación con el resto de la población, mientras que si está más cerca de la derecha, significa que tienes un puntaje más alto.</p>
+            <img src="{{ url_for('static', filename='scorecard_with_point.png') }}" alt="Distribución del Scorecard con tu puntaje">
+        </div>
+    </div>
+</body>
+</html>

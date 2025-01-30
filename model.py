@@ -12,7 +12,9 @@ class ScorecardModel:
         print("Probabilidades:",probabilities)
         # Escalar a la escala del scorecard
         scores = self.min_score + (self.max_score - self.min_score) * probabilities
-        return scores
+        risk_category = "Bajo" if scores > 700 else "Moderado" if scores > 500 else "Alto"
+        decision = "Aprobado" if risk_category == "Bajo" else "En Revisión" if risk_category == "Moderado" else "Rechazado"
+        return scores,risk_category,decision
 
     def evaluate(self, X, y):
         return self.base_model.evaluate(X, y)

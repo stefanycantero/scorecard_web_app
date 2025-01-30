@@ -1,0 +1,76 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 130px;
+}
+
+.result-container {
+    background: white;
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    width: 1000px;
+    height: 1150px;
+}
+
+h2 {
+    color: #333;
+    font-size: 2em;
+}
+
+.score-category, .score-decision {
+    color: #555;
+    font-size: 1.2em;
+    margin: 10px 0;
+}
+
+.score-meter {
+    margin-top: 30px;
+    position: relative;
+}
+
+.circular-chart {
+    transform: rotate(-90deg);
+    width: 150px;
+    height: 150px;
+    display: block;
+    margin: 0 auto;
+}
+
+.circle-background {
+    stroke: #e6e6e6;
+}
+
+.circle-fill {
+    stroke-linecap: round;
+    transition: stroke-dasharray 1s ease;
+}
+
+.score-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 1.5em;
+    font-weight: bold;
+    color: #333;
+}
+
+.score-category {
+    color: #333;
+    font-weight: bold;
+}
+
+.score-decision {
+    color: #777;
+}
+
+.global-score {
+    margin-top: 30px;
+    position: relative;
+}

@@ -2,6 +2,7 @@ from flask import Flask, render_template, request, jsonify
 import numpy as np
 import pickle
 from model import ScorecardModel # Necesario para deserializar el modelo
+from PIL import Image, ImageDraw
 
 app = Flask(__name__)
 
@@ -91,16 +92,60 @@ def form():
         numerical_features_scaled = scaler.transform([numerical_features])[0]
 
         X = np.array(numerical_features_scaled.tolist() + encoded_features).reshape(1, -1)
-        print(X)
+        
         try:
             prediction = model.predict(X)
-            return jsonify(prediction=int(prediction))
+            score, risk_category, decision = prediction
+            
+            # Llamamos a la función para guardar la imagen con el puntaje
+            save_score_on_image(score[0][0])
+
+            # Pasar los resultados a la plantilla
+            return render_template('result.html', score=score[0][0], risk_category=risk_category, decision=decision)
         
         except Exception as e:
-            return jsonify(error="Prediction error: " + str(e), details={"input_data": form_data, "encoded_features": encoded_features})
+            return render_template('result.html', error="Prediction error: " + str(e))
 
     except Exception as e:
-        return jsonify(error=str(e))
+        return render_template('result.html', error=str(e))
+
+# Función para guardar la imagen con el punto
+def save_score_on_image(user_score):
+    image_path = 'static/images/scorecard_plot.png'
+    img = Image.open(image_path)
+    image_width, image_height = img.size
+
+    # Definir el rango del puntaje (por ejemplo, 300-850)
+    min_score = 300
+    max_score = 850
+
+    # Márgenes izquierdo y derecho
+    margin_left = 198  # Ancho del margen izquierdo en píxeles
+    margin_right = 113  # Ancho del margen derecho en píxeles
+
+    # Calcular el ancho útil, excluyendo los márgenes izquierdo y derecho
+    useful_width = image_width - margin_left - margin_right
+
+    # Calcular la posición del puntaje
+    score_range = max_score - min_score
+    score_position_x = int((user_score - min_score) / score_range * useful_width ) + margin_left
+
+    # Mover el punto hacia arriba ajustando la posición 'y'
+    point_y_position = int(image_height * 0.6)
+
+    # Crear el objeto para dibujar sobre la imagen
+    draw = ImageDraw.Draw(img)
+    point_color = (255, 0, 0)  # Color rojo
+    point_radius = 10  # Radio del punto
+
+    # Dibujar el punto sobre la imagen
+    draw.ellipse((score_position_x - point_radius, point_y_position - point_radius, 
+                  score_position_x + point_radius, point_y_position + point_radius), 
+                 fill=point_color)
+
+    # Guardar la imagen con el punto
+    output_image_path = 'static/scorecard_with_point.png'
+    img.save(output_image_path)
 
 if __name__ == '__main__':
     app.run()
