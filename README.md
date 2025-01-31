@@ -1,6 +1,13 @@
 # Aplicativo Web para Cálculo de Puntaje Crediticio y Aprobación de Créditos
 
-Este repositorio contiene una aplicación web desarrollada con Flask, HTML, CSS y JavaScript que permite a los usuarios calcular su puntaje crediticio y evaluar la posibilidad de obtener un crédito. La aplicación utiliza un modelo de Machine Learning con TensorFlow y redes neuronales, entrenado con el dataset credit-risk-dataset de Kaggle, para realizar predicciones sobre el riesgo crediticio y la aprobación de créditos.
+Este repositorio contiene una aplicación web desarrollada con Flask, HTML, CSS y JavaScript que permite a los usuarios calcular su puntaje crediticio y evaluar la posibilidad de obtener un crédito. La aplicación utiliza un modelo de Machine Learning con TensorFlow y redes neuronales, entrenado con el dataset credit-risk-dataset de Kaggle, para realizar predicciones sobre el riesgo crediticio y la aprobación de créditos. 
+
+Equipo 01 conformado por:
+
+Verónica Pérez Zea
+Sebastian Aguinaga Velasquez
+Stefany Cantero Cárdenas
+María Del Pilar Mira Londoño
 
 ## Funcionalidades
 
@@ -23,16 +30,28 @@ Este repositorio contiene una aplicación web desarrollada con Flask, HTML, CSS 
 *   **Dataset:** credit-risk-dataset de Kaggle
 
 ## Estructura del Proyecto
-├── app.py          # Archivo principal de la aplicación Flask
-├── templates/      # Archivos HTML para las plantillas web
-│   ├── index.html
-│   └── result.html
-├── static/         # Archivos CSS e imágenes
+├── app.py          # Archivo principal de la aplicación Flask  
+
+├── templates/      # Archivos HTML para las plantillas web  
+
+│   ├── index.html  
+
+│   └── result.html  
+
+├── static/         # Archivos CSS e imágenes   
+
 │   ├── images
+
 │   ├── style.css
+
 │   └── result_style.css
+
 ├── requirements.txt # Lista de dependencias del proyecto
+
 ├── model.pkl        # Archivo .pkl con el modelo entrenado
+
 ├── scaler.pkl       # Archivo .pkl con el scaler del modelo
+
 ├── model.py         # Archivo .py con la clase que permite cambiar la escala del resultado
+
 └── README.md       # Este archivo
