@@ -7,6 +7,7 @@
     <title>Scorecard Prediction</title>
     <link rel="stylesheet" href="../static/style.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 
 <body>
@@ -15,7 +16,7 @@
         <ul>
             <li><a href="{{ url_for('index') }}">Inicio</a></li>
             <li><a href="#reporte">Reporte técnico</a></li> <!-- Pendiente agregar enlace -->
-            <li><a href="https://github.com/stefanycantero/scorecard_web_app">GitHub</a></li> <!-- Pendiente agregar enlace -->
+            <li><a href="https://github.com/stefanycantero/scorecard_web_app.git">GitHub</a></li>
         </ul>
     </nav>
 
@@ -50,18 +51,24 @@
             <form action="/form" method="POST">
                 <div class="form-column">
                     <label for="loan_amnt">Monto del crédito:
+                        <span class="tooltip"><i class="fa-solid fa-info-circle"></i><span class="tooltip-text">Cantidad solicitada en el préstamo.</span> </span>
                         <input type="number" id="loan_amnt" name="loan_amnt" step="any" required>
                     </label><br>
                     <label for="term">Plazo:
+                        <span class="tooltip"><i class="fa-solid fa-info-circle"></i><span class="tooltip-text">Duración del crédito en meses</span> </span>
                         <input type="number" id="term" name="term" step="any" required>
                     </label><br>
                     <label for="int_rate">Tasa de interés:
+                        <span class="tooltip"><i class="fa-solid fa-info-circle"></i><span class="tooltip-text">Porcentaje que se cobra sobre el monto prestado. Ejm: Si es 5%, ingresar 0.05</span> </span>
                         <input type="number" id="int_rate" name="int_rate" step="any" required>
                     </label><br>
                     <label for="installment">Cuota:
+                        <span class="tooltip"><i class="fa-solid fa-info-circle"></i><span class="tooltip-text">Pago mensual del préstamo.</span> </span>
                         <input type="number" id="installment" name="installment" step="any" required>
                     </label><br>
-                    <label for="sub_grade">Subgrado:</label>
+                    <label for="sub_grade">Subgrado:
+                        <span class="tooltip"><i class="fa-solid fa-info-circle"></i><span class="tooltip-text">Clasificación de riesgo del crédito.</span> </span>
+                    </label>
                     <select id="sub_grade" name="sub_grade" required>
                         <option value="A1">A1</option>
                         <option value="A2">A2</option>
@@ -100,41 +107,54 @@
                         <option value="G5">G5</option>
                     </select><br>
                     <label for="emp_length">Años de empleo:
+                        <span class="tooltip"><i class="fa-solid fa-info-circle"></i><span class="tooltip-text">Tiempo que el solicitante ha trabajado en su empleo actual.</span> </span>
                         <input type="number" id="emp_length" name="emp_length" step="any" required>
                     </label><br>
                     <label for="annual_inc">Ingreso anual:
+                        <span class="tooltip"><i class="fa-solid fa-info-circle"></i><span class="tooltip-text">Cantidad de dinero que gana el solicitante al año.</span> </span>
                         <input type="number" id="annual_inc" name="annual_inc" step="any" required>
                     </label><br>
                     <label for="dti">Relación deuda-ingreso:
+                        <span class="tooltip"><i class="fa-solid fa-info-circle"></i><span class="tooltip-text">Porcentaje de los ingresos destinados a pagar deudas. Ejm: Si es 5%, ingresar 0.05</span> </span>
                         <input type="number" id="dti" name="dti" step="any" required>
                     </label><br>
                     <label for="delinq_2yrs">Morosidad en 2 años:
+                        <span class="tooltip"><i class="fa-solid fa-info-circle"></i><span class="tooltip-text">Veces que el solicitante ha incumplido pagos en los últimos 2 años.</span> </span>
                         <input type="number" id="delinq_2yrs" name="delinq_2yrs" step="any" required>
                     </label><br>
                     <label for="inq_last_6mths">Consultas en los últimos 6 meses:
+                        <span class="tooltip"><i class="fa-solid fa-info-circle"></i><span class="tooltip-text">Número de veces que se ha revisado su historial crediticio recientemente.</span> </span>
                         <input type="number" id="inq_last_6mths" name="inq_last_6mths" step="any" required>
                     </label><br>
                     <label for="open_acc">Cuentas abiertas:
+                        <span class="tooltip"><i class="fa-solid fa-info-circle"></i><span class="tooltip-text">Número total de cuentas de crédito activas.</span> </span>
                         <input type="number" id="open_acc" name="open_acc" step="any" required>
                     </label><br>    
                 </div>
                 <div class="form-column">
                     <label for="pub_rec">Registros públicos:
+                        <span class="tooltip"><i class="fa-solid fa-info-circle"></i><span class="tooltip-text">Cantidad de eventos negativos en su historial, como quiebras o demandas.</span> </span>
                         <input type="number" id="pub_rec" name="pub_rec" step="any" required>
                     </label><br>
                     <label for="revol_bal">Saldo revolvente:
+                        <span class="tooltip"><i class="fa-solid fa-info-circle"></i><span class="tooltip-text">Deuda pendiente en tarjetas de crédito o líneas de crédito rotativas.</span> </span>
                         <input type="number" id="revol_bal" name="revol_bal" step="any" required>
                     </label><br>
                     <label for="revol_util">Utilización revolvente:
+                        <span class="tooltip"><i class="fa-solid fa-info-circle"></i><span class="tooltip-text">Porcentaje del crédito disponible que está siendo usado. Ejm: Si es 5%, ingresar 0.05</span> </span>
                         <input type="number" id="revol_util" name="revol_util" step="any" required>
                     </label><br>
                     <label for="tot_coll_amt">Monto total de colecciones:
+                        <span class="tooltip"><i class="fa-solid fa-info-circle"></i><span class="tooltip-text">Suma de deudas en cobranzas.</span> </span>
                         <input type="number" id="tot_coll_amt" name="tot_coll_amt" step="any" required>
                     </label><br>
                     <label for="tot_cur_bal">Saldo total actual:
+                        <span class="tooltip"><i class="fa-solid fa-info-circle"></i><span class="tooltip-text">Total de dinero disponible en sus cuentas de crédito.</span> </span>
                         <input type="number" id="tot_cur_bal" name="tot_cur_bal" step="any" required>
                     </label><br>
-                    <label for="home_ownership">Propiedad de vivienda:</label>
+                    <label for="home_ownership">Propiedad de vivienda:
+                        <span class="tooltip"><i class="fa-solid fa-info-circle"></i><span class="tooltip-text">Tipo de vivienda del solicitante (Ej: Hipoteca, Alquilada, Propia).</span> </span>
+                    </label>
                     <select id="home_ownership" name="home_ownership" required>
                         <option value="MORTGAGE">Hipoteca</option>
                         <option value="NONE">Ninguna</option>
@@ -142,12 +162,16 @@
                         <option value="OWN">Propia</option>
                         <option value="RENT">Alquiler</option>
                     </select><br>
-                    <label for="verification_status">Estado de verificación:</label>
+                    <label for="verification_status">Estado de verificación:
+                        <span class="tooltip"><i class="fa-solid fa-info-circle"></i><span class="tooltip-text">Si los ingresos fueron verificados por la entidad financiera.</span> </span>
+                    </label>
                     <select id="verification_status" name="verification_status" required>
                         <option value="Source Verified">Fuente verificada</option>
                         <option value="Verified">Verificado</option>
                     </select><br>
-                    <label for="purpose">Propósito:</label>
+                    <label for="purpose">Propósito:
+                        <span class="tooltip"><i class="fa-solid fa-info-circle"></i><span class="tooltip-text">Motivo por el cual se solicita el crédito (Ej: consolidar deudas, comprar un auto).</span> </span>
+                    </label>
                     <select id="purpose" name="purpose" required>
                         <option value="credit_card">Tarjeta de crédito</option>
                         <option value="debt_consolidation">Consolidación de deuda</option>
@@ -168,7 +192,6 @@
                     <input type="submit" value="Predecir">
                 </div>    
             </form>
-           <!-- <div id="result"></div>-->
         </section>
 
         <!-- Reporte tecnico 
@@ -185,37 +208,8 @@
             <a>Enlace de GitHub</a>
         </section> -->
 
-        <!-- <script>
-            $(document).ready(function () {
-                // Formulario
-                $('#prediction-form').on('submit', function(event) {
-                    event.preventDefault(); // Prevent the form from submitting the traditional way
-                    $.ajax({
-                        url: "{{ url_for('form') }}",
-                        type: "POST",
-                        data: $(this).serialize(),
-                        success: function(response) {
-                            if (response.prediction !== undefined) {
-                                $('#result').html(
-                                    '<h2>Resultado de la Predicción</h2><p>Su puntaje crediticio es: <strong>' + response.prediction.toFixed(2) + '</strong></p>'
-                                );
-                            } else if (response.error !== undefined) {
-                                $('#result').html('<p>Hubo un error al procesar el formulario: ' + response.error + '</p>');
-                            }
-                        },
-                        error: function(xhr, status, error) {
-                            $('#result').html('<p>Hubo un error al procesar el formulario: ' + error + '</p>');
-                        }
-                    });
-                });
+        <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 
-                // Acordeón
-                $('.accordion-button').click(function () {
-                    $(this).next('.accordion-content').slideToggle();
-                    $(this).toggleClass('active');
-                });
-            });
-        </script>-->
     </div>
 
     <!-- Pie de Página -->

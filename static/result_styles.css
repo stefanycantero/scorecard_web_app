@@ -1,11 +1,11 @@
 body {
     font-family: Arial, sans-serif;
     background-color: #f4f4f4;
-    display: flex;
+    display:grid;
     justify-content: center;
     align-items: center;
     height: 100vh;
-    margin: 130px;
+    margin: 50px;
 }
 
 .result-container {
@@ -14,8 +14,8 @@ body {
     border-radius: 15px;
     box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
     text-align: center;
-    width: 1000px;
-    height: 1150px;
+    width: 1200px;
+    height: 1300px;
 }
 
 h2 {
@@ -26,7 +26,8 @@ h2 {
 .score-category, .score-decision {
     color: #555;
     font-size: 1.2em;
-    margin: 10px 0;
+    margin-top: 10px;
+    margin-bottom: 20px;
 }
 
 .score-meter {
@@ -73,4 +74,29 @@ h2 {
 .global-score {
     margin-top: 30px;
     position: relative;
+    font-size: large;
+  
+}
+
+a {
+    background-color: #ffc09f;
+    color: white;
+    padding: 10px 15px;
+    cursor: pointer;
+    border-radius: 15px; 
+    font-family: 'Montserrat', sans-serif; 
+    border-color: white;
+    &:hover {
+        background-color: #ff8c61;
+        font-weight: bold;
+    }
+    font-size: x-large;
+    text-decoration: none;
+} 
+
+button { 
+    padding: 10px 15px;
+    border-color: transparent;
+    background-color: transparent;
+
 }

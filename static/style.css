@@ -163,7 +163,7 @@ select, option {
     color: #666;
 }
 
-.content button[type="submit"] {
+.content input[type="submit"] {
     background-color: #ffc09f;
     color: white;
     padding: 10px 15px;
@@ -211,3 +211,32 @@ button:hover {
         transform: translateY(0);
     }
 }
+
+.tooltip {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+    color:#ccc;
+    font-size: 16px;
+  }
+  
+.tooltip .tooltip-text {
+    visibility: hidden;
+    width: 160px;
+    background-color: black;
+    color: white;
+    text-align: center;
+    padding: 5px;
+    border-radius: 5px;
+    position: absolute;
+    bottom: 150%;
+    left: 50%;
+    transform: translateX(-50%);
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+
+.tooltip:hover .tooltip-text {
+    visibility: visible;
+    opacity:1;
+  }
