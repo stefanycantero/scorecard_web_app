@@ -38,7 +38,7 @@
                 <section id="video">
                     <p>Mira el video tutorial para aprender a usar la aplicación:</p>
                     <video width="400" controls>
-                        <source src="{{ url_for('static', filename='tutorial.mp4') }}" type="video/mp4">
+                        <source src="{{ url_for('static', filename='video_promocional.mp4') }}" type="video/mp4">
                         Tu navegador no soporta la reproducción de videos.
                     </video>
                 </section>
@@ -195,23 +195,17 @@
             </form>
         </section>
 
-        <!-- Reporte tecnico 
-        <section id="reporte">
-            <h2>Reporte Técnico</h2>
-            <p>Encuentra aquí todos los detalles sobre la elaboración de este proyecto</p>
-            <a>Blog del proyecto en Notion</a>
-        </section>  -->
+    <!-- Acordeón -->
+    <script>
+        $('.accordion-button').click(function () {
+            $(this).next('.accordion-content').slideToggle();
+            $(this).toggleClass('active');
+        });
+    </script>
 
-        <!-- Repositorio
-        <section id="repositorio">
-            <h2>Repositorio</h2>
-            <p>En este repositorio puedes ver más a fondo sobre el desarrollo del código para lograr esta web app</p>
-            <a>Enlace de GitHub</a>
-        </section> -->
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 
-        <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
-
-        <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 
     </div>
 
