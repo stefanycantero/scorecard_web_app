@@ -1,4 +1,4 @@
-# Aplicativo Web para Cálculo de Puntaje Crediticio y Aprobación de Créditos
+# Aplicativo Web para cálculo de puntaje crediticio y aprobación de créditos
 
 Este repositorio contiene una aplicación web desarrollada con Flask, HTML, CSS y JavaScript que permite a los usuarios calcular su puntaje crediticio y evaluar la posibilidad de obtener un crédito. La aplicación utiliza un modelo de Machine Learning con TensorFlow y redes neuronales, entrenado con el dataset credit-risk-dataset de Kaggle, para realizar predicciones sobre el riesgo crediticio y la aprobación de créditos. 
 
