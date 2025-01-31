@@ -9,6 +9,8 @@
 </head>
 <body>
     <div class="result-container">
+
+        <!-- Resultados -->
         <h2>Tu puntaje es: {{ score }}</h2>
         <div class="score-category">Categoría de riesgo: {{ risk_category }}</div>
         <div class="score-decision">Decisión: {{ decision }}</div>
@@ -30,12 +32,16 @@
             </svg>
             <div class="score-text">{{ score }}</div>
         </div>
+        <!-- Puntaje global -->
         <div class="global-score">
-            <h2>Puntuaje Global</h2>
+            <h3 style="color: dimgray;">Puntuaje Global</h3>
             <p>En la gráfica que ves, se muestra cómo están distribuidos los puntajes de otras personas. </p>
             <p>A medida que más personas tienen puntajes similares, esos puntajes aparecerán más cerca de la parte más alta de la gráfica. </p>
-            <p>El punto rojo que verás en la gráfica indica dónde se encuentra tu puntaje en comparación con los demás. Si tu punto está más cerca de la parte izquierda, significa que tu puntaje es más bajo en relación con el resto de la población, mientras que si está más cerca de la derecha, significa que tienes un puntaje más alto.</p>
+            <p>El punto <span style="color: red;">rojo</span> que verás en la gráfica indica dónde se encuentra tu puntaje en comparación con los demás. Si tu punto está más cerca de la parte izquierda, significa que tu puntaje es más bajo en relación con el resto de la población, mientras que si está más cerca de la derecha, significa que tienes un puntaje más alto.</p>
             <img src="{{ url_for('static', filename='scorecard_with_point.png') }}" alt="Distribución del Scorecard con tu puntaje">
+        </div>
+        <div class="button-container">
+            <button><a href="{{ url_for('index') }}">Nueva Predicción</a></button>
         </div>
     </div>
 </body>
