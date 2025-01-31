@@ -4,10 +4,10 @@ Este repositorio contiene una aplicación web desarrollada con Flask, HTML, CSS 
 
 Equipo 01 conformado por:
 
-Verónica Pérez Zea
-Sebastian Aguinaga Velasquez
-Stefany Cantero Cárdenas
-María Del Pilar Mira Londoño
+* Verónica Pérez Zea
+* Sebastian Aguinaga Velasquez
+* Stefany Cantero Cárdenas
+* María Del Pilar Mira Londoño
 
 ## Funcionalidades
 
