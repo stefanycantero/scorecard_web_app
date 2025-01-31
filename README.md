@@ -44,6 +44,8 @@ Equipo 01 conformado por:
 
 │   ├── style.css
 
+│   ├── video_promocional.mp4
+
 │   └── result_style.css
 
 ├── requirements.txt # Lista de dependencias del proyecto
